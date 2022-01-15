@@ -61,7 +61,7 @@ alacrittyInstallDebian(){
     gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
     cd ..
     mkdir $HOME/.config/alacritty/
-    cp alacritty.yml $HOME/.config/alacritty/alacritty.yml
+    cp config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 }
 alacrittyInstallArch(){
     # sudo pacman -S alacritty --noconfirm
@@ -77,8 +77,9 @@ alacrittyInstallArch(){
     sudo update-desktop-database
     sudo mkdir -p /usr/local/share/man/man1
     gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
+    cd ..
     mkdir $HOME/.config/alacritty/
-    touch $HOME/.config/alacritty/alacritty.yml
+    cp config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 }
 # xfce4TerminalInstallDebian(){
 #     sudo apt-get update
@@ -90,6 +91,8 @@ alacrittyInstallArch(){
 # zavrsiti config
 kittyInstallDebian(){
     sudo apt install -y kitty
+    mkdir $HOME/.config/kitty/
+    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
             #for now disabled ~ reason term: xterm
     # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin \
     # launch=n
@@ -115,7 +118,7 @@ kittyInstallArch(){
 
 select terminal in "${terminals[@]}" "Quit"; do 
     case "$REPLY" in
-    1) echo -e "You choose to install $terminal\n"
+    1) echo -e "You choose to install $terminal\n" # Terminator
         PS3="$basedOn"
         select based in "${basedOS[@]}"; do 
             case "$REPLY" in
@@ -133,7 +136,7 @@ select terminal in "${terminals[@]}" "Quit"; do
             esac
         done
         break;;
-    2) echo "You choose to install $terminal"
+    2) echo "You choose to install $terminal"  # Alacritty
         PS3="$basedOn"
         select based in "${basedOS[@]}"; do 
             case "$REPLY" in
@@ -152,7 +155,7 @@ select terminal in "${terminals[@]}" "Quit"; do
         done
         # sudo apt install -y alacritty
         break;;
-    3) echo -e "You choose to install $terminal\n"
+    3) echo -e "You choose to install $terminal\n" # Kitty
         PS3="$basedOn"
         select based in "${basedOS[@]}"; do 
             case "$REPLY" in
@@ -160,7 +163,7 @@ select terminal in "${terminals[@]}" "Quit"; do
                 checkDistroName
                 checkCurlDebian
                 kittyInstallDebian
-                debianTheme
+                # debianTheme
                 break;;
             2) echo "Your system is based on $based"
                 checkDistroName
