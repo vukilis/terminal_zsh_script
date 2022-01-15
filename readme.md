@@ -1,3 +1,6 @@
+## Screenshot
+![Image of Yaktocat](https://raw.githubusercontent.com/vukilis/terminal_zsh_script/main/script.png)
+
 # terminal-zsh-script
 
 **My favourite terminals and zsh config**
