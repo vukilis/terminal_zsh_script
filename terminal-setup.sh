@@ -1,5 +1,10 @@
 #!/bin/bash
-# lsb_release -is || cat /etc/*release || uname -om ) 2>/dev/null | head -n1
+clear
+
+echo "--------------------------------------"
+echo "-----   TERMINAL INSTALLATION    -----"
+echo "--------------------------------------"
+
 title="Terminal installation"
 prompt="Choose terminal to install: "
 terminals=("Terminator" "Alacrity" "Kitty")
@@ -14,10 +19,10 @@ checkDistroName(){
 }
 
 debianTheme(){
-    bash debian-setup.sh
+    bash debian-zsh-setup.sh
 }
 archTheme(){
-    bash arch-setup.sh
+    bash arch-zsh-setup.sh
 }
 
 checkCurlDebian(){
@@ -85,42 +90,17 @@ alacrittyInstallArch(){
     mkdir $HOME/.config/alacritty/
     cp config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 }
-# xfce4TerminalInstallDebian(){
-#     sudo apt-get update
-#     sudo apt-get install xfce4-terminal -y
-# }
-# xfce4TerminalInstallArch(){
-#     yay -S xfce4-terminal --noconfirm
-# }
-# zavrsiti config
+
 kittyInstallDebian(){
     sudo apt install -y kitty
     mkdir $HOME/.config/kitty/
     cp config/kitty.conf $HOME/.config/kitty/kitty.conf
-            #for now disabled ~ reason term: xterm
-    # curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin \
-    # launch=n
-    # ln -s ~/.local/kitty.app/bin/kitty ~/.local/bin/
-    # cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-    # sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty.desktop
-    # echo 'Please check your ~/.profile file and uncomment PATH: "$HOME/.local/bin:"\n'
 }
 kittyInstallArch(){
     yay -S kitty --noconfirm
     mkdir $HOME/.config/kitty/
     cp config/kitty.conf $HOME/.config/kitty/kitty.conf
 }
-
-# checkBin(){
-#     DIR=~/.local/bin
-#     if [ ! -d $DIR ]; then
-#         echo "Warning: '$DIR' NOT found. '$DIR' will be made..."
-#         mkdir $DIR
-#         echo "----------------------------------------------------------------------------\n"
-#     else
-#         echo "'$DIR' found and now copying files, please wait ...\n"
-#     fi
-# }
 
 select terminal in "${terminals[@]}" "Quit"; do 
     case "$REPLY" in
@@ -185,3 +165,7 @@ select terminal in "${terminals[@]}" "Quit"; do
     *) echo "- $REPLY is invalid option. Try another one. -";continue;;
     esac
 done
+
+echo "--------------------------------------"
+echo "-----    INSTALLATION FINISH     -----"
+echo "--------------------------------------"
