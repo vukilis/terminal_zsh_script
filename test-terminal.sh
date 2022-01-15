@@ -17,7 +17,7 @@ debianTheme(){
     bash debian-setup.sh
 }
 archTheme(){
-    bash ./arch-setup.sh
+    bash arch-setup.sh
 }
 
 checkCurlDebian(){
@@ -62,6 +62,23 @@ alacrittyInstallDebian(){
     cd ..
     mkdir $HOME/.config/alacritty/
     cp alacritty.yml $HOME/.config/alacritty/alacritty.yml
+}
+alacrittyInstallArch(){
+    # sudo pacman -S alacritty --noconfirm
+    sudo curl https://sh.rustup.rs -sSf | sh
+    source $HOME/.cargo/env 
+    pacman -S cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python
+    git clone https://github.com/jwilm/alacritty.git
+    cd alacritty
+    cargo build --release
+    sudo cp target/release/alacritty /usr/local/bin
+    sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
+    sudo desktop-file-install extra/linux/Alacritty.desktop
+    sudo update-desktop-database
+    sudo mkdir -p /usr/local/share/man/man1
+    gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
+    mkdir $HOME/.config/alacritty/
+    touch $HOME/.config/alacritty/alacritty.yml
 }
 # xfce4TerminalInstallDebian(){
 #     sudo apt-get update
@@ -127,7 +144,7 @@ select terminal in "${terminals[@]}" "Quit"; do
                 break;;
             2) echo "Your system is based on $based"
                 checkDistroName
-                xfce4TerminalInstallArch
+                alacrittyInstallArch
                 archTheme
                 break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
