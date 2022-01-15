@@ -13,9 +13,9 @@ checkDistroName(){
     echo -e "System name is: $( (lsb_release -is || cat /etc/*release || uname -o ) 2>/dev/null | head -n1 ) \n"
 }
 
-# debianTheme(){
-#     bash debian-setup.sh
-# }
+debianTheme(){
+    bash debian-setup.sh
+}
 archTheme(){
     bash ./arch-setup.sh
 }
@@ -123,7 +123,7 @@ select terminal in "${terminals[@]}" "Quit"; do
             1) echo "Your system is based on $based"
                 checkDistroName
                 alacrittyInstallDebian
-                # debianTheme 
+                debianTheme 
                 break;;
             2) echo "Your system is based on $based"
                 checkDistroName
