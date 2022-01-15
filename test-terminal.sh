@@ -42,9 +42,13 @@ checkCurlArch(){
 
 terminatorInstallDebian(){
     sudo apt install -y terminator
+    mkdir $HOME/.config/terminator/
+    cp config/terminator.conf $HOME/.config/terminator/config
 }
 terminatorInstallArch(){
     sudo pacman -S terminator --noconfirm
+    mkdir $HOME/.config/terminator/
+    cp config/terminator.conf $HOME/.config/terminator/config
 }
 alacrittyInstallDebian(){
     sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -103,6 +107,8 @@ kittyInstallDebian(){
 }
 kittyInstallArch(){
     yay -S kitty --noconfirm
+    mkdir $HOME/.config/kitty/
+    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
 }
 
 # checkBin(){
@@ -163,7 +169,7 @@ select terminal in "${terminals[@]}" "Quit"; do
                 checkDistroName
                 checkCurlDebian
                 kittyInstallDebian
-                # debianTheme
+                debianTheme
                 break;;
             2) echo "Your system is based on $based"
                 checkDistroName

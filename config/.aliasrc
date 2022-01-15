@@ -26,8 +26,9 @@ ex ()
 export EDITOR=vi
 
 # ALIAS
-alias l='ls -l'
-alias ll='ls -la'
+alias l='ls -l --color=auto'
+alias ll='ls -la --color=auto'
+alias ls='ls --color=auto'
 alias zshrc='${=EDITOR} ~/.zshrc'
 alias pp10k='${=EDITOR} ~/.p10k.zsh'
 alias h='history'
