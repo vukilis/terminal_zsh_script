@@ -11,8 +11,8 @@ bash terminal-setup.sh
 
 ## What Script Do?
 ### - terminal-setup.sh
-- Ask you what terminal you want to install
-- Ask you what is your system based on
+- Ask what terminal you want to install
+- Ask what is your system based on
 - Install selected terminal
 - Setup terminal configuration file
 - Start zsh-setup based on your system

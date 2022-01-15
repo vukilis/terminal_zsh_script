@@ -122,7 +122,7 @@ select terminal in "${terminals[@]}" "Quit"; do
             esac
         done
         break;;
-    2) echo "You choose to install $terminal"  # Alacritty
+    2) echo "You choose to install $terminal\n"  # Alacritty
         PS3="$basedOn"
         select based in "${basedOS[@]}"; do 
             case "$REPLY" in
