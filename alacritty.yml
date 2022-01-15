@@ -1,0 +1,17 @@
+window.opacity: 0.92
+
+font: 
+  normal:
+    # Needs to be powerline font if using zsh theme with powerline
+    family: MesloLGS NF
+  # Font size
+  size: 12
+
+# Login shell with arguments
+# shell:
+#   program: /bin/szh
+#   args:
+#     - --login
+
+# Startup directory, unset or None for home directory
+working_directory: None
