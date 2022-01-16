@@ -37,23 +37,12 @@ bash terminal-setup.sh
 ```
 reboot, logout or restart terminal
 ```
-
-## If you want only zsh config
-#### DEBIAN
-```
-git clone https://github.com/vukilis/terminal_zsh_script
-cd terminal-zsh-script
-bash debian-zsh-setup.sh
-```
-#### ARCH
-```
-git clone https://github.com/vukilis/terminal_zsh_script
-cd terminal-zsh-script
-bash arch-zsh-setup.sh
-```
 ## Config files of terminals
 - **Terminator:** Create or open **/.config/terminator/config**
 - **Alacritty:** Create or open **~/.config/alacritty/alacritty.yml**
 - **Kitty:** Create or open **~/.config/kitty/kitty.conf**  
 
 `Recommended font: MesloLGS NF Regular`
+
+## If you want only zsh config
+**Check this [script](https://github.com/vukilis/ZSH_terminal)**
