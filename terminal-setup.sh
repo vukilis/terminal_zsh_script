@@ -74,7 +74,7 @@ alacrittyInstallDebian(){
 }
 alacrittyInstallArch(){
     # sudo pacman -S alacritty --noconfirm
-    sudo curl https://sh.rustup.rs -sSf | sh
+    sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
     source $HOME/.cargo/env 
     pacman -S cmake freetype2 fontconfig pkg-config make libxcb libxkbcommon python
     git clone https://github.com/jwilm/alacritty.git
