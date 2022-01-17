@@ -5,6 +5,15 @@
 
 **My favourite terminals and zsh config**
 
+## Requirements
+ - AUR (for arch user)
+```
+git clone "https://aur.archlinux.org/yay.git"
+cd yay
+makepkg -si --noconfirm
+yay -Sy
+```
+
 # How To Use
 ```
 git clone https://github.com/vukilis/terminal_zsh_script
