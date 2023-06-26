@@ -70,7 +70,7 @@ alacrittyInstallDebian(){
     gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
     cd ..
     mkdir $HOME/.config/alacritty/
-    cp config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 alacrittyInstallArch(){
     # sudo pacman -S alacritty --noconfirm
@@ -88,7 +88,7 @@ alacrittyInstallArch(){
     gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
     cd ..
     mkdir $HOME/.config/alacritty/
-    cp config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 
 kittyInstallDebian(){
