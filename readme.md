@@ -18,7 +18,7 @@ yay -Sy
 ```
 git clone https://github.com/vukilis/terminal_zsh_script
 cd terminal-zsh-script
-bash terminal-setup.sh
+./terminal-setup.sh
 ```
 
 ## What Script Do?
@@ -52,6 +52,3 @@ reboot, logout or restart terminal
 - **Kitty:** Create or open **~/.config/kitty/kitty.conf**  
 
 `Recommended font: MesloLGS NF Regular`
-
-## If you want only zsh config
-**Check this [script](https://github.com/vukilis/ZSH_terminal)**
