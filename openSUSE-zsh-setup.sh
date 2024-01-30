@@ -3,12 +3,13 @@ echo "--------------------------------------"
 echo "-----       ZSH INSTALATION      -----"
 echo "--------------------------------------"
 
-zypper --non-interactive install zsh
+sudo zypper --non-interactive install zsh
+sudo zypper --non-interactive install opi
 opi -n zsh-syntax-highlighting && opi -n autojump && opi -n zsh-autosuggestions
 touch "$HOME/.cache/zshhistory"
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >> ~/.zshrc
-chsh $USER -s /bin/zsh
+sudo chsh -s $(which zsh) $(whoami)
 #echo $SHELL
 
 echo "--------------------------------------"
@@ -27,3 +28,4 @@ echo "--------------------------------------"
 echo "-----            END             -----"
 echo "--------------------------------------"
 echo "REBOOT PC"
+
