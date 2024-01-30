@@ -9,7 +9,7 @@ title="Terminal installation"
 prompt="Choose terminal to install: "
 terminals=("Terminator" "Alacrity" "Kitty")
 basedOn="What is your distro based on: "
-basedOS=("debian" "arch")
+basedOS=("debian" "arch" "openSUSE")
 
 echo -e "$title\n"
 PS3="$prompt"
@@ -23,6 +23,9 @@ debianTheme(){
 }
 archTheme(){
     bash arch-zsh-setup.sh
+}
+openSUSETheme(){
+    bash openSUSE-zsh-setup.sh
 }
 
 checkCurlDebian(){
@@ -55,6 +58,12 @@ terminatorInstallArch(){
     mkdir $HOME/.config/terminator/
     cp config/terminator.conf $HOME/.config/terminator/config
 }
+terminatorInstallopenSUSE(){
+    zypper --non-interactive install terminator
+    mkdir $HOME/.config/terminator/
+    cp config/terminator.conf $HOME/.config/terminator/config
+}
+
 alacrittyInstallDebian(){
     sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
     source $HOME/.cargo/env 
@@ -90,6 +99,11 @@ alacrittyInstallArch(){
     mkdir $HOME/.config/alacritty/
     cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
+alacrittyInstallopenSUSE(){
+    zypper --non-interactive install alacritty
+    mkdir $HOME/.config/alacritty/
+    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+}
 
 kittyInstallDebian(){
     sudo apt install -y kitty
@@ -98,6 +112,11 @@ kittyInstallDebian(){
 }
 kittyInstallArch(){
     yay -S kitty --noconfirm
+    mkdir $HOME/.config/kitty/
+    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
+}
+kittyInstallopenSUSE(){
+    zypper --non-interactive install kitty
     mkdir $HOME/.config/kitty/
     cp config/kitty.conf $HOME/.config/kitty/kitty.conf
 }
@@ -118,11 +137,16 @@ select terminal in "${terminals[@]}" "Quit"; do
                 terminatorInstallArch
                 archTheme
                 break;;
+            3) echo "Your system is based on $based"
+                checkDistroName
+                terminatorInstallopenSUSE
+                openSUSETheme
+                break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
             esac
         done
         break;;
-    2) echo "You choose to install $terminal\n"  # Alacritty
+    2) echo -e "You choose to install $terminal\n"  # Alacritty
         PS3="$basedOn"
         select based in "${basedOS[@]}"; do 
             case "$REPLY" in
@@ -135,6 +159,11 @@ select terminal in "${terminals[@]}" "Quit"; do
                 checkDistroName
                 alacrittyInstallArch
                 archTheme
+                break;;
+            3) echo "Your system is based on $based"
+                checkDistroName
+                alacrittyInstallopenSUSE
+                openSUSETheme
                 break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
             esac
@@ -156,6 +185,11 @@ select terminal in "${terminals[@]}" "Quit"; do
                 checkCurlArch
                 kittyInstallArch
                 archTheme
+                break;;
+            3) echo "Your system is based on $based"
+                checkDistroName
+                kittyInstallopenSUSE
+                openSUSETheme
                 break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
             esac
