@@ -59,7 +59,7 @@ terminatorInstallArch(){
     cp config/terminator.conf $HOME/.config/terminator/config
 }
 terminatorInstallopenSUSE(){
-    zypper --non-interactive install terminator
+    sudo zypper --non-interactive install terminator
     mkdir $HOME/.config/terminator/
     cp config/terminator.conf $HOME/.config/terminator/config
 }
@@ -100,7 +100,7 @@ alacrittyInstallArch(){
     cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 alacrittyInstallopenSUSE(){
-    zypper --non-interactive install alacritty
+    sudo zypper --non-interactive install alacritty
     mkdir $HOME/.config/alacritty/
     cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
@@ -116,7 +116,7 @@ kittyInstallArch(){
     cp config/kitty.conf $HOME/.config/kitty/kitty.conf
 }
 kittyInstallopenSUSE(){
-    zypper --non-interactive install kitty
+    sudo zypper --non-interactive install kitty
     mkdir $HOME/.config/kitty/
     cp config/kitty.conf $HOME/.config/kitty/kitty.conf
 }
