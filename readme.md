@@ -3,7 +3,13 @@
 
 # terminal-zsh-script
 
-**My favourite terminals and zsh config**
+**My favourite terminals and zsh config.**
+
+## Distribution Support
+
+- Debian
+- Arch
+- openSUSE
 
 ## Requirements
  - AUR (for arch user)
@@ -29,7 +35,7 @@ cd terminal-zsh-script
 - Setup terminal configuration file
 - Start zsh-setup based on your system
 
-### - arch-zsh-setup.sh & debian-zsh-setup.sh
+### - [arch/debian/openSUSE]-zsh-setup.sh
 - auto install dependencies: 
   > zsh  
   > zsh-syntax-highlighting  
