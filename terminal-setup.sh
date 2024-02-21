@@ -9,7 +9,7 @@ title="Terminal installation"
 prompt="Choose terminal to install: "
 terminals=("Terminator" "Alacrity" "Kitty")
 basedOn="What is your distro based on: "
-basedOS=("debian" "arch" "openSUSE")
+basedOS=("Debian" "Arch" "openSUSE" "Fedora")
 
 echo -e "$title\n"
 PS3="$prompt"
@@ -26,6 +26,9 @@ archTheme(){
 }
 openSUSETheme(){
     bash openSUSE-zsh-setup.sh
+}
+fedoraTheme(){
+    bash fedora-zsh-setup.sh
 }
 
 checkCurlDebian(){
@@ -47,6 +50,28 @@ checkCurlArch(){
         sudo pacman -Sy $PKG
     fi;
 }
+checkCurlOpenSUSE(){
+    PKG="curl";
+    if [ ! command -v $PKG &> /dev/null ]; then
+        echo "curl is not installed. Installing..."
+        sudo zypper install -y curl
+        echo "curl has been installed."
+    else
+        echo "curl is already installed."
+    fi
+}
+checkCurlFedora(){
+    PKG="curl";
+    if ! command -V $PKG &> /dev/null
+    then
+        echo "curl is not installed. Installing..."
+        sudo dnf install -y curl
+        echo "curl has been installed."
+    else
+        echo "curl is already installed."
+    fi
+}
+
 
 terminatorInstallDebian(){
     sudo apt install -y terminator
@@ -60,6 +85,11 @@ terminatorInstallArch(){
 }
 terminatorInstallopenSUSE(){
     sudo zypper --non-interactive install terminator
+    mkdir $HOME/.config/terminator/
+    cp config/terminator.conf $HOME/.config/terminator/config
+}
+terminatorInstallFedora(){
+    sudo dnf install -y terminator
     mkdir $HOME/.config/terminator/
     cp config/terminator.conf $HOME/.config/terminator/config
 }
@@ -104,6 +134,11 @@ alacrittyInstallopenSUSE(){
     mkdir $HOME/.config/alacritty/
     cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
+alacrittyInstallFeodra(){
+    sudo dnf install -y alacritty
+    mkdir $HOME/.config/alacritty/
+    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+}
 
 kittyInstallDebian(){
     sudo apt install -y kitty
@@ -117,6 +152,11 @@ kittyInstallArch(){
 }
 kittyInstallopenSUSE(){
     sudo zypper --non-interactive install kitty
+    mkdir $HOME/.config/kitty/
+    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
+}
+kittyInstallFedora(){
+    sudo dnf install -y kitty
     mkdir $HOME/.config/kitty/
     cp config/kitty.conf $HOME/.config/kitty/kitty.conf
 }
@@ -142,6 +182,11 @@ select terminal in "${terminals[@]}" "Quit"; do
                 terminatorInstallopenSUSE
                 openSUSETheme
                 break;;
+            4) echo "Your system is based on $based"
+                checkDistroName
+                terminatorInstallFedora
+                fedoraTheme
+                break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
             esac
         done
@@ -152,18 +197,27 @@ select terminal in "${terminals[@]}" "Quit"; do
             case "$REPLY" in
             1) echo "Your system is based on $based"
                 checkDistroName
+                checkCurlDebian
                 alacrittyInstallDebian
                 debianTheme 
                 break;;
             2) echo "Your system is based on $based"
                 checkDistroName
+                checkCurlArch
                 alacrittyInstallArch
                 archTheme
                 break;;
             3) echo "Your system is based on $based"
                 checkDistroName
+                checkCurlOpenSUSE
                 alacrittyInstallopenSUSE
                 openSUSETheme
+                break;;
+            4) echo "Your system is based on $based"
+                checkDistroName
+                checkCurlFedora
+                alacrittyInstallFeodra
+                fedoraTheme
                 break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
             esac
@@ -176,13 +230,11 @@ select terminal in "${terminals[@]}" "Quit"; do
             case "$REPLY" in
             1) echo "Your system is based on $based"
                 checkDistroName
-                checkCurlDebian
                 kittyInstallDebian
                 debianTheme
                 break;;
             2) echo "Your system is based on $based"
                 checkDistroName
-                checkCurlArch
                 kittyInstallArch
                 archTheme
                 break;;
@@ -190,6 +242,11 @@ select terminal in "${terminals[@]}" "Quit"; do
                 checkDistroName
                 kittyInstallopenSUSE
                 openSUSETheme
+                break;;
+            4) echo "Your system is based on $based"
+                checkDistroName
+                kittyInstallFedora
+                fedoraTheme
                 break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
             esac
