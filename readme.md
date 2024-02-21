@@ -10,6 +10,7 @@
 - Debian
 - Arch
 - openSUSE
+- Fedora
 
 ## Requirements
  - AUR (for arch user)
@@ -35,7 +36,7 @@ cd terminal-zsh-script
 - Setup terminal configuration file
 - Start zsh-setup based on your system
 
-### - [arch/debian/openSUSE]-zsh-setup.sh
+### - [arch/debian/openSUSE/fedora]-zsh-setup.sh
 - auto install dependencies: 
   > zsh  
   > zsh-syntax-highlighting  
