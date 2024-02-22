@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-terminal" version="1.0">
+  <property name="background-mode" type="string" value="TERMINAL_BACKGROUND_TRANSPARENT"/>
+  <property name="scrolling-on-output" type="bool" value="true"/>
+  <property name="scrolling-bar" type="string" value="TERMINAL_SCROLLBAR_NONE"/>
+  <property name="misc-cursor-shape" type="string" value="TERMINAL_CURSOR_SHAPE_IBEAM"/>
+  <property name="misc-cursor-blinks" type="bool" value="true"/>
+  <property name="font-name" type="string" value="MesloLGS NF 12"/>
+  <property name="text-blink-mode" type="string" value="TERMINAL_TEXT_BLINK_MODE_FOCUSED"/>
+  <property name="font-allow-bold" type="bool" value="true"/>
+  <property name="background-darkness" type="double" value="0.85999999999999999"/>
+  <property name="misc-menubar-default" type="bool" value="false"/>
+  <property name="misc-borders-default" type="bool" value="false"/>
+  <property name="misc-slim-tabs" type="bool" value="true"/>
+  <property name="color-foreground" type="string" value="#e5e5b5b56666"/>
+  <property name="tab-activity-color" type="string" value="#2221c3c3a1a0"/>
+  <property name="color-background" type="string" value="#1f1f1f1f1f1f"/>
+  <property name="color-palette" type="string" value="rgb(0,0,0);rgb(255,85,85);rgb(98,160,234);rgb(229,181,102);rgb(0,0,170);rgb(170,0,170);rgb(0,170,170);rgb(170,170,170);rgb(94,92,100);rgb(255,85,85);rgb(85,255,85);rgb(255,255,85);rgb(85,85,255);rgb(255,85,255);rgb(85,255,255);rgb(255,255,255)"/>
+  <property name="color-bold-is-bright" type="bool" value="false"/>
+  <property name="color-use-theme" type="bool" value="false"/>
+  <property name="color-background-vary" type="bool" value="false"/>
+  <property name="color-selection-use-default" type="bool" value="false"/>
+  <property name="color-selection" type="string" value="#2f2f2f2f2f2f"/>
+  <property name="color-selection-background" type="string" value="#e5e5b5b56666"/>
+  <property name="color-cursor-use-default" type="bool" value="true"/>
+  <property name="color-cursor-foreground" type="string" value="#2f2f2f2f2f2f"/>
+  <property name="color-cursor" type="string" value="#1f1f1f1f1f1f"/>
+  <property name="cell-width-scale" type="double" value="1"/>
+  <property name="cell-height-scale" type="double" value="1"/>
+  <property name="command-login-shell" type="bool" value="false"/>
+  <property name="misc-mouse-autohide" type="bool" value="false"/>
+  <property name="misc-new-tab-adjacent" type="bool" value="false"/>
+  <property name="misc-bell" type="bool" value="true"/>
+  <property name="misc-bell-urgent" type="bool" value="false"/>
+  <property name="misc-default-geometry" type="string" value="120x24"/>
+</channel>
