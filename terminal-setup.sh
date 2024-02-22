@@ -1,9 +1,9 @@
 #!/bin/bash
 clear
 
-echo "--------------------------------------"
-echo "-----   TERMINAL INSTALLATION    -----"
-echo "--------------------------------------"
+# echo "--------------------------------------"
+# echo "-----   TERMINAL INSTALLATION    -----"
+# echo "--------------------------------------"
 
 title="Terminal installation"
 prompt="Choose terminal to install: "
@@ -307,6 +307,6 @@ select terminal in "${terminals[@]}" "Quit"; do
     esac
 done
 
-echo "--------------------------------------"
-echo "-----    INSTALLATION FINISH     -----"
-echo "--------------------------------------"
+# echo "--------------------------------------"
+# echo "-----    INSTALLATION FINISH     -----"
+# echo "--------------------------------------"
