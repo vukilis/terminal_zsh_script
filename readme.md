@@ -5,6 +5,11 @@
 
 **My favourite terminals and zsh config.**
 
+* Kitty
+* Alacrity
+* Terminator
+* xfce terminal
+
 ## Distribution Support
 
 - Debian
