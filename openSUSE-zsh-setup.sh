@@ -21,6 +21,7 @@ fc-cache -f -v
 cp config/.p10k.zsh $HOME/.p10k.zsh
 cp config/.zshrc $HOME/.zshrc
 cp config/.aliasrc $HOME/.aliasrc
+cp config/gtk-3.0 $HOME/gtk-3.0
 source ~/.zshrc
 source ~/.p10k.zsh
 
