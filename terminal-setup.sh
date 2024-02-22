@@ -7,7 +7,7 @@ echo "--------------------------------------"
 
 title="Terminal installation"
 prompt="Choose terminal to install: "
-terminals=("Terminator" "Alacrity" "Kitty")
+terminals=("Terminator" "Alacrity" "Kitty" "xfce")
 basedOn="What is your distro based on: "
 basedOS=("Debian" "Arch" "openSUSE" "Fedora")
 
@@ -161,6 +161,28 @@ kittyInstallFedora(){
     cp config/kitty.conf $HOME/.config/kitty/kitty.conf
 }
 
+xfceInstallDebian(){
+    sudo apt install -y xfce4-terminal
+    mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+}
+xfceInstallArch(){
+    sudo pacman -S xfce4-terminal --noconfirm # yay -S fce4-terminal
+    mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+}
+xfceInstallopenSUSE(){
+    sudo zypper --non-interactive install xfce4-terminal
+    mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+}
+xfceInstallFedora(){
+    sudo dnf install -y xfce4-terminal
+    mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
+    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+}
+
+
 select terminal in "${terminals[@]}" "Quit"; do 
     case "$REPLY" in
     1) echo -e "You choose to install $terminal\n" # Terminator
@@ -246,6 +268,34 @@ select terminal in "${terminals[@]}" "Quit"; do
             4) echo "Your system is based on $based"
                 checkDistroName
                 kittyInstallFedora
+                fedoraTheme
+                break;;
+            *) echo "- $REPLY is invalid option. Try another one. -";continue;;
+            esac
+        done
+        break;;
+    4) echo -e "You choose to install $terminal\n" # xfce
+        PS3="$basedOn"
+        select based in "${basedOS[@]}"; do 
+            case "$REPLY" in
+            1) echo "Your system is based on $based"
+                checkDistroName
+                xfceInstallDebian
+                debianTheme
+                break;;
+            2) echo "Your system is based on $based"
+                checkDistroName
+                xfceInstallArch
+                archTheme
+                break;;
+            3) echo "Your system is based on $based"
+                checkDistroName
+                xfceInstallopenSUSE
+                openSUSETheme
+                break;;
+            4) echo "Your system is based on $based"
+                checkDistroName
+                xfceInstallFedora
                 fedoraTheme
                 break;;
             *) echo "- $REPLY is invalid option. Try another one. -";continue;;
