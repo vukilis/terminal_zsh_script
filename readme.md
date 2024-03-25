@@ -68,7 +68,7 @@ cd terminal-zsh-script
 * make file zshhistory
 * set powerlevel10k theme
 * switch from BASH to ZSH
-* install DroidSansMono font 
+* install DroidSansMono font
 * setup files: **.p10k.zsh, .zshrc, .aliasrc**
 
 ## After script end
