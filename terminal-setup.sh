@@ -1,6 +1,57 @@
 #!/bin/bash
 clear
 
+# echo "-------------------------------------"
+# echo "-------   HELP INFORMATION    -------"
+# echo "-------------------------------------"
+
+show_help() {
+    echo "Usage: $0 [options]"
+    echo "Options:"
+    echo "  -H, --help       Display this help message"
+    echo "  -A, --author     Display author information"
+    echo "  -V, --version    Display version information"
+}
+show_version() {
+    echo "terminal-zsh-script Version 2.0"
+}
+
+show_author() {
+    echo -e "AUTHOR: 
+    Vuk1lis
+WEBSITE: 
+    https://vukilis.github.io/website/
+GITHUB: 
+    https://github.com/vukilis
+NAME: 
+    terminal-zsh-script
+VERSION: 
+    2.0"
+}
+
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --help | -H)
+            show_help
+            exit 0
+            ;;
+        --author | -A)
+            show_author
+            exit 0
+            ;;    
+        --version | -V)
+            show_version
+            exit 0
+            ;;
+        *)
+            echo "Invalid option: $1"
+            show_help
+            exit 1
+            ;;
+    esac
+    shift
+done
+
 # echo "--------------------------------------"
 # echo "-----   TERMINAL INSTALLATION    -----"
 # echo "--------------------------------------"
@@ -11,6 +62,7 @@ terminals=("Terminator" "Alacrity" "Kitty" "xfce")
 basedOn="What is your distro based on: "
 basedOS=("Debian" "Arch" "openSUSE" "Fedora")
 
+echo -e "For more information check $0 --help\n"
 echo -e "$title\n"
 PS3="$prompt"
 
@@ -19,16 +71,16 @@ checkDistroName(){
 }
 
 debianTheme(){
-    bash debian-zsh-setup.sh
+    bash ./scripts/debian-zsh-setup.sh
 }
 archTheme(){
-    bash arch-zsh-setup.sh
+    bash ./scripts/arch-zsh-setup.sh
 }
 openSUSETheme(){
-    bash openSUSE-zsh-setup.sh
+    bash ./scripts/openSUSE-zsh-setup.sh
 }
 fedoraTheme(){
-    bash fedora-zsh-setup.sh
+    bash ./scripts/fedora-zsh-setup.sh
 }
 
 checkCurlDebian(){
