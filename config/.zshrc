@@ -45,8 +45,14 @@ fi
 PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
 
 # Ctrl + left/right arrow keys
+#debian, opensuse, fedora
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
+
+#arch
+bindkey '^K' kill-line
+bindkey '^A' beginning-of-line
+bindkey '^E' end-of-lin
 
 # Load ; should be last.
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
