@@ -73,7 +73,7 @@ bindkey '^A' beginning-of-line
 bindkey '^E' end-of-lin
 
 # Load ; should be last.
-if [[ $(uname -a) == *"Arch"* ]]; then
+if [[ OS_ID=$(grep -oP '^ID=\K.*' /etc/os-release) ]]; then
     # Load plugins for Arch Linux
     source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
     source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
