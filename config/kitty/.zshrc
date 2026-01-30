@@ -1,3 +1,6 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -16,7 +19,17 @@ function clicolors() {
     c=''
 }
 
+# Dependancies You Need for this Config
+# zsh-syntax-highlighting - syntax highlighting for ZSH in standard repos
+# autojump - jump to directories with j or jc for child or jo to open in file manager
+# zsh-autosuggestions - Suggestions based on your history
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
+
+# Initial Setup
+# touch "$HOME/.cache/zshhistory
+# Setup Alias in $HOME/zsh/aliasrc
+# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+# echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>! ~/.zshrc
 
 # Enable colors and change prompt:
 autoload -U colors && colors
@@ -37,6 +50,8 @@ setopt appendhistory
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# set PATH so it includes user's private bin if it exists #
+# export PATH="$HOME/.local/bin:$PATH"
 if [ -d "$HOME/.local/bin" ] ; then
   export PATH="$HOME/.local/bin:$PATH"
 fi
@@ -46,6 +61,7 @@ export TERM=xterm-256color
 
 # clean up duplicates from PATH #
 PATH=$(printf "%s" "$PATH" | awk -v RS=':' '!a[$1]++ { if (NR > 1) printf RS; printf $1 }')
+
 
 bindkey -e
 
