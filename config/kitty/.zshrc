@@ -19,17 +19,7 @@ function clicolors() {
     c=''
 }
 
-# Dependancies You Need for this Config
-# zsh-syntax-highlighting - syntax highlighting for ZSH in standard repos
-# autojump - jump to directories with j or jc for child or jo to open in file manager
-# zsh-autosuggestions - Suggestions based on your history
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=59'
-
-# Initial Setup
-# touch "$HOME/.cache/zshhistory
-# Setup Alias in $HOME/zsh/aliasrc
-# git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
-# echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>! ~/.zshrc
 
 # Enable colors and change prompt:
 autoload -U colors && colors
