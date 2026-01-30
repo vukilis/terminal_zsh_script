@@ -128,22 +128,22 @@ checkCurlFedora(){
 terminatorInstallDebian(){
     sudo apt install -y terminator
     mkdir $HOME/.config/terminator/
-    cp config/terminator.conf $HOME/.config/terminator/config
+    cp config/terminator/terminator.conf $HOME/.config/terminator/config
 }
 terminatorInstallArch(){
     sudo pacman -S terminator --noconfirm
     mkdir $HOME/.config/terminator/
-    cp config/terminator.conf $HOME/.config/terminator/config
+    cp config/terminator/terminator.conf $HOME/.config/terminator/config
 }
 terminatorInstallopenSUSE(){
     sudo zypper --non-interactive install terminator
     mkdir $HOME/.config/terminator/
-    cp config/terminator.conf $HOME/.config/terminator/config
+    cp config/terminator/terminator.conf $HOME/.config/terminator/config
 }
 terminatorInstallFedora(){
     sudo dnf install -y terminator
     mkdir $HOME/.config/terminator/
-    cp config/terminator.conf $HOME/.config/terminator/config
+    cp config/terminator/terminator.conf $HOME/.config/terminator/config
 }
 
 alacrittyInstallDebian(){
@@ -161,7 +161,7 @@ alacrittyInstallDebian(){
     gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
     cd ..
     mkdir $HOME/.config/alacritty/
-    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+    cp config/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 alacrittyInstallArch(){
     # sudo pacman -S alacritty --noconfirm
@@ -179,59 +179,71 @@ alacrittyInstallArch(){
     gzip -c extra/alacritty.man | sudo tee /usr/local/share/man/man1/alacritty.1.gz > /dev/null
     cd ..
     mkdir $HOME/.config/alacritty/
-    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+    cp config/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 alacrittyInstallopenSUSE(){
     sudo zypper --non-interactive install alacritty
     mkdir $HOME/.config/alacritty/
-    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+    cp config/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 alacrittyInstallFeodra(){
     sudo dnf install -y alacritty
     mkdir $HOME/.config/alacritty/
-    cp config/alacritty.toml $HOME/.config/alacritty/alacritty.toml
+    cp config/alacritty/alacritty.toml $HOME/.config/alacritty/alacritty.toml
 }
 
 kittyInstallDebian(){
     sudo apt install -y kitty
     mkdir $HOME/.config/kitty/
-    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
+    cp config/kitty/gtk-3.0 $HOME/gtk-3.0
+    cp config/kitty/kitty-themes $HOME/.config/kitty
+    cp config/kitty/kitty.conf $HOME/.config/kitty
+    cp config/kitty/theme.conf $HOME/.config/kitty
 }
 kittyInstallArch(){
     yay -S kitty --noconfirm
     mkdir $HOME/.config/kitty/
-    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
+    cp config/kitty/gtk-3.0 $HOME/gtk-3.0
+    cp config/kitty/kitty-themes $HOME/.config/kitty
+    cp config/kitty/kitty.conf $HOME/.config/kitty
+    cp config/kitty/theme.conf $HOME/.config/kitty
 }
 kittyInstallopenSUSE(){
     sudo zypper --non-interactive install kitty
     mkdir $HOME/.config/kitty/
-    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
+    cp config/kitty/gtk-3.0 $HOME/gtk-3.0
+    cp config/kitty/kitty-themes $HOME/.config/kitty
+    cp config/kitty/kitty.conf $HOME/.config/kitty
+    cp config/kitty/theme.conf $HOME/.config/kitty
 }
 kittyInstallFedora(){
     sudo dnf install -y kitty
     mkdir $HOME/.config/kitty/
-    cp config/kitty.conf $HOME/.config/kitty/kitty.conf
+    cp config/kitty/gtk-3.0 $HOME/gtk-3.0
+    cp config/kitty/kitty-themes $HOME/.config/kitty
+    cp config/kitty/kitty.conf $HOME/.config/kitty
+    cp config/kitty/theme.conf $HOME/.config/kitty
 }
 
 xfceInstallDebian(){
     sudo apt install -y xfce4-terminal
     mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
-    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+    cp config/xfce/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
 }
 xfceInstallArch(){
     sudo pacman -S xfce4-terminal --noconfirm # yay -S fce4-terminal
     mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
-    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+    cp config/xfce/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
 }
 xfceInstallopenSUSE(){
     sudo zypper --non-interactive install xfce4-terminal
     mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
-    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+    cp config/xfce/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
 }
 xfceInstallFedora(){
     sudo dnf install -y xfce4-terminal
     mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
-    cp config/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
+    cp config/xfce/xfce4-terminal.xml $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-terminal.xml
 }
 
 
