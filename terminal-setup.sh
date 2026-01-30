@@ -66,8 +66,30 @@ echo -e "For more information check $0 --help\n"
 echo -e "$title\n"
 PS3="$prompt"
 
-checkDistroName(){
-    echo -e "System name is: $( (lsb_release -is || cat /etc/*release || uname -o ) 2>/dev/null | head -n1 ) \n"
+# checkDistroName(){
+#     echo -e "$( (lsb_release -is || cat /etc/*release || uname -o ) 2>/dev/null | head -n1 )\n"
+# }
+
+checkDistroName() {
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        # Check ID and ID_LIKE first
+        case "$ID $ID_LIKE" in
+            *arch*) echo "Arch" ;;
+            *debian*|*ubuntu*) echo "Debian" ;;
+            *fedora*|*rhel*|*centos*) echo "Fedora" ;;
+            *suse*|*opensuse*) echo "openSUSE" ;;
+            *)
+                # Fallback: Check for the package manager
+                if [ -f /usr/bin/pacman ]; then echo "Arch"
+                elif [ -f /usr/bin/apt ]; then echo "Debian"
+                elif [ -f /usr/bin/dnf ]; then echo "Fedora"
+                elif [ -f /usr/bin/zypper ]; then echo "openSUSE"
+                else echo "unknown"
+                fi
+                ;;
+        esac
+    fi
 }
 
 debianTheme(){
@@ -247,128 +269,84 @@ xfceInstallFedora(){
 }
 
 
-select terminal in "${terminals[@]}" "Quit"; do 
-    case "$REPLY" in
-    1) echo -e "You choose to install $terminal\n" # Terminator
-        PS3="$basedOn"
-        select based in "${basedOS[@]}"; do 
-            case "$REPLY" in
-            1) echo "Your system is based on $based"
-                checkDistroName
-                terminatorInstallDebian
-                debianTheme
-                break;;
-            2) echo "Your system is based on $based"
-                checkDistroName
-                terminatorInstallArch
-                archTheme
-                break;;
-            3) echo "Your system is based on $based"
-                checkDistroName
-                terminatorInstallopenSUSE
-                openSUSETheme
-                break;;
-            4) echo "Your system is based on $based"
-                checkDistroName
-                terminatorInstallFedora
-                fedoraTheme
-                break;;
-            *) echo "- $REPLY is invalid option. Try another one. -";continue;;
-            esac
-        done
-        break;;
-    2) echo -e "You choose to install $terminal\n"  # Alacritty
-        PS3="$basedOn"
-        select based in "${basedOS[@]}"; do 
-            case "$REPLY" in
-            1) echo "Your system is based on $based"
-                checkDistroName
-                checkCurlDebian
-                alacrittyInstallDebian
-                debianTheme 
-                break;;
-            2) echo "Your system is based on $based"
-                checkDistroName
-                checkCurlArch
-                alacrittyInstallArch
-                archTheme
-                break;;
-            3) echo "Your system is based on $based"
-                checkDistroName
-                checkCurlOpenSUSE
-                alacrittyInstallopenSUSE
-                openSUSETheme
-                break;;
-            4) echo "Your system is based on $based"
-                checkDistroName
-                checkCurlFedora
-                alacrittyInstallFeodra
-                fedoraTheme
-                break;;
-            *) echo "- $REPLY is invalid option. Try another one. -";continue;;
-            esac
-        done
-        # sudo apt install -y alacritty
-        break;;
-    3) echo -e "You choose to install $terminal\n" # Kitty
-        PS3="$basedOn"
-        select based in "${basedOS[@]}"; do 
-            case "$REPLY" in
-            1) echo "Your system is based on $based"
-                checkDistroName
-                kittyInstallDebian
-                debianTheme
-                break;;
-            2) echo "Your system is based on $based"
-                checkDistroName
-                kittyInstallArch
-                archTheme
-                break;;
-            3) echo "Your system is based on $based"
-                checkDistroName
-                kittyInstallopenSUSE
-                openSUSETheme
-                break;;
-            4) echo "Your system is based on $based"
-                checkDistroName
-                kittyInstallFedora
-                fedoraTheme
-                break;;
-            *) echo "- $REPLY is invalid option. Try another one. -";continue;;
-            esac
-        done
-        break;;
-    4) echo -e "You choose to install $terminal\n" # xfce
-        PS3="$basedOn"
-        select based in "${basedOS[@]}"; do 
-            case "$REPLY" in
-            1) echo "Your system is based on $based"
-                checkDistroName
-                xfceInstallDebian
-                debianTheme
-                break;;
-            2) echo "Your system is based on $based"
-                checkDistroName
-                xfceInstallArch
-                archTheme
-                break;;
-            3) echo "Your system is based on $based"
-                checkDistroName
-                xfceInstallopenSUSE
-                openSUSETheme
-                break;;
-            4) echo "Your system is based on $based"
-                checkDistroName
-                xfceInstallFedora
-                fedoraTheme
-                break;;
-            *) echo "- $REPLY is invalid option. Try another one. -";continue;;
-            esac
-        done
-        break;;
-    $((${#terminals[@]}+1))) echo "Goodbye!"; break;;
-    *) echo "- $REPLY is invalid option. Try another one. -";continue;;
-    esac
+# Main Terminal Menu Prompt
+PS3="Choose terminal to install: "
+
+# Main Terminal Menu
+PS3="Choose terminal to install: "
+
+while true; do
+    select terminal in "${terminals[@]}" "Quit"; do 
+        case "$REPLY" in
+            1|2|3|4) 
+                echo -e "\nYou chose: \e[32m$terminal\e[0m"
+                
+                PS3="Select your Distro: "
+                
+                select based in "${basedOS[@]}" "Back"; do
+                    case $REPLY in
+                        $((${#basedOS[@]}+1)) | "Back")
+                            echo -e "\e[33mReturning to main menu...\e[0m\n"
+                            PS3="Choose terminal to install: "
+                            REPLY="" 
+                            break 2  
+                            ;;
+                        
+                        1|2|3|4)
+                            actual_distro=$(checkDistroName)
+                            if [[ "$actual_distro" == *"$based"* ]]; then
+                                echo -e "System Match: \e[32m$actual_distro\e[0m"
+                                
+                                case "$terminal" in
+                                    "Terminator")
+                                        [[ "$based" == "Debian" ]]   && { checkCurlDebian; terminatorInstallDebian; debianTheme; }
+                                        [[ "$based" == "Arch" ]]     && { checkCurlArch; terminatorInstallArch; archTheme; }
+                                        [[ "$based" == "openSUSE" ]] && { checkCurlOpenSUSE; terminatorInstallopenSUSE; openSUSETheme; }
+                                        [[ "$based" == "Fedora" ]]   && { checkCurlFedora; terminatorInstallFedora; fedoraTheme; }
+                                        ;;
+                                    "Alacrity")
+                                        [[ "$based" == "Debian" ]]   && { checkCurlDebian; alacrittyInstallDebian; debianTheme; }
+                                        [[ "$based" == "Arch" ]]     && { checkCurlArch; alacrittyInstallArch; archTheme; }
+                                        [[ "$based" == "openSUSE" ]] && { checkCurlOpenSUSE; alacrittyInstallopenSUSE; openSUSETheme; }
+                                        [[ "$based" == "Fedora" ]]   && { checkCurlFedora; alacrittyInstallFeodra; fedoraTheme; }
+                                        ;;
+                                    "Kitty")
+                                        [[ "$based" == "Debian" ]]   && { checkCurlDebian; kittyInstallDebian; debianTheme; }
+                                        [[ "$based" == "Arch" ]]     && { checkCurlArch; kittyInstallArch; archTheme; }
+                                        [[ "$based" == "openSUSE" ]] && { checkCurlOpenSUSE; kittyInstallopenSUSE; openSUSETheme; }
+                                        [[ "$based" == "Fedora" ]]   && { checkCurlFedora; kittyInstallFedora; fedoraTheme; }
+                                        ;;
+                                    "xfce")
+                                        [[ "$based" == "Debian" ]]   && { checkCurlDebian; xfceInstallDebian; debianTheme; }
+                                        [[ "$based" == "Arch" ]]     && { checkCurlArch; xfceInstallArch; archTheme; }
+                                        [[ "$based" == "openSUSE" ]] && { checkCurlOpenSUSE; xfceInstallopenSUSE; openSUSETheme; }
+                                        [[ "$based" == "Fedora" ]]   && { checkCurlFedora; xfceInstallFedora; fedoraTheme; }
+                                        ;;
+                                esac
+                                exit 0
+                            else
+                                echo -e "Detected by script: \e[31m$actual_distro (Please select $actual_distro!)\e[0m"
+                            fi
+                            ;;
+
+                        *)
+                            echo -e "- \e[31m$REPLY is invalid option. Try another one.\e[0m -"
+                            ;;
+                    esac
+                done
+                break 
+                ;;
+
+            $((${#terminals[@]}+1)) | "Quit") 
+                echo "Goodbye!"
+                exit 0
+                ;;
+
+            *) 
+                echo -e "- \e[31m$REPLY is invalid option. Try another one.\e[0m -"
+                ;;
+        esac
+    done
 done
 
 # echo "--------------------------------------"
